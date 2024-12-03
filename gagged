@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string word = "mississippi", dashes = "_____", guess;
+    int letterGuesses = 11, wordGuesses = 3;
+
+    while (letterGuesses > 0 && wordGuesses > 0) {
+        cout << "Word: " << dashes << "\nGuesses left: " << letterGuesses << " letters, " << wordGuesses << " words\n";
+        cout << "Guess: ";
+        cin >> guess;
+        if (guess.length() == 1) { // Guess letter
+            bool found = false;
+            for (size_t i = 0; i < word.length(); i++) if (word[i] == guess[0]) { dashes[i] = guess[0]; found = true; }
+            if (!found) letterGuesses--;
+        } else if (guess == word) { // Guess word
+            cout << "Correct! The word is: " << word << endl;
+            return 0;
+        } else wordGuesses--;
+        if (dashes == word) { cout << "Correct! The word is: " << word << endl; return 0; }
+    }
+    cout << "Game over! The word was: " << word << endl;
+    return 0;
+}
